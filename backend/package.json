@@ -1,0 +1,26 @@
+{
+  "name": "food-management",
+  "version": "1.0.0",
+  "description": "\"Final year project about food management and waste reduction\"",
+  "license": "ISC",
+  "author": "\"Waqas Ahmed\"",
+  "type": "commonjs",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "joi": "^18.0.1",
+    "jsonwebtoken": "^9.0.2",
+    "lodash": "^4.17.21",
+    "mongoose": "^8.18.0",
+    "winston": "^3.17.0"
+  },
+  "devDependencies": {
+    "morgan": "^1.10.1"
+  }
+}
