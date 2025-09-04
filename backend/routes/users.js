@@ -1,8 +1,14 @@
+const auth = require('../middleware/auth');
 const { User, validate } = require('../models/user');
 const lodash = require('lodash');
 const bcrypt = require('bcrypt');
 const express = require('express');
 const router = express.Router();
+
+router.get('/me', auth, async (req, res) => {
+  const user = await User.findById(req.user._id).select('-password');
+  res.send(user);
+});
 
 router.post('/', async (req, res) => {
   try {
@@ -19,6 +25,7 @@ router.post('/', async (req, res) => {
       name: req.body.name,
       email: req.body.email,
       password: req.body.password,
+      role: req.body.role || 'donor',
     });
 
     // Hash password
