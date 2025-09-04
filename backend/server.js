@@ -1,3 +1,4 @@
+const donationRoutes = require('./routes/donations');
 const login = require('./routes/login');
 const users = require('./routes/users');
 const mongoose = require('mongoose');
@@ -18,8 +19,9 @@ app.use(express.json());
 app.use(morgan('tiny'));
 
 //Handling Routes.
-app.use('/api/users/register', users);
-app.use('/api/users/login', login);
+app.use('/api/users', users);
+app.use('/api/login', login);
+app.use('/api/donations', donationRoutes);
 
 //Port.
 const port = process.env.PORT;
