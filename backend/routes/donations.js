@@ -23,6 +23,13 @@ router.get(
       const donations = await Donation.find({ donor: req.user._id })
         .populate('donor', '-_id name email')
         .populate('ngo', '-_id name email');
+
+      if (!donations || donations.length === 0) {
+        return res
+          .status(404)
+          .send('No donations have been created by the user.');
+      }
+      res.send(donations);
     }
   }
 );
@@ -73,6 +80,26 @@ router.put('/:id/accept', auth, authorize('ngo'), async function (req, res) {
   await donation.save();
 
   res.send(donation);
+});
+
+// NGO: View accepted donations.
+router.get('/my-accepted', auth, authorize('ngo'), async (req, res) => {
+  const donations = await Donation.find({
+    ngo: req.user._id,
+    status: 'accepted',
+  })
+    .populate('donor', '-_id name email')
+    .populate('ngo', '-_id name');
+  res.send(donations);
+});
+
+// NGO: View pending donations (not yet accepted)
+router.get('/pending', auth, authorize('ngo'), async (req, res) => {
+  const donations = await Donation.find({ status: 'pending' }).populate(
+    'donor',
+    'name email'
+  );
+  res.send(donations);
 });
 
 module.exports = router;
