@@ -8,6 +8,11 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 
+//JWT_SECRET configuration.
+if (!process.env.JWT_SECRET) {
+  logger.error('FATAL ERROR: JWT_SECRET is not defined.');
+  process.exit(1);
+}
 //Db Connections.
 mongoose
   .connect(process.env.DATABASE_URL)

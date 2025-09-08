@@ -4,6 +4,11 @@ Joi.objectId = require('joi-objectid')(Joi);
 
 //Donation Schema.
 const donationSchema = new mongoose.Schema({
+  foodName: {
+    type: String,
+    require: true,
+    trim: true,
+  },
   foodType: {
     type: String,
     enum: ['cooked', 'raw', 'packaged'],
@@ -43,6 +48,7 @@ const donationSchema = new mongoose.Schema({
 //Joi Validation.
 function validateDonation(donation) {
   const schema = Joi.object({
+    foodName: Joi.string().min(3).max(255).required(),
     foodType: Joi.string().valid('cooked', 'raw', 'packaged').required(),
     quantity: Joi.string().min(1).max(50).required(),
     location: Joi.string().min(3).max(255).required(),
