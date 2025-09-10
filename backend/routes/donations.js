@@ -5,12 +5,16 @@ const auth = require('../middleware/auth');
 const authorize = require('../middleware/role');
 
 //Admin: view donations.
-router.get('/', auth, authorize('admin'), async function (req, res) {
-  const donations = await Donation.find()
-    .populate('donor', '-_id name email')
-    .populate('ngo', '-_id name email');
+router.get('/', auth, authorize('admin'), async function (req, res, next) {
+  try {
+    const donations = await Donation.find()
+      .populate('donor', '-_id name email')
+      .populate('ngo', '-_id name email');
 
-  res.send(donations);
+    res.send(donations);
+  } catch (execption) {
+    next(execption);
+  }
 });
 
 //Donor view own donations.
@@ -18,8 +22,8 @@ router.get(
   '/my-donations',
   auth,
   authorize('donor'),
-  async function (req, res) {
-    {
+  async function (req, res, next) {
+    try {
       const donations = await Donation.find({ donor: req.user._id })
         .populate('donor', '-_id name email')
         .populate('ngo', '-_id name email');
@@ -30,76 +34,98 @@ router.get(
           .send('No donations have been created by the user.');
       }
       res.send(donations);
+    } catch (execption) {
+      next(execption);
     }
   }
 );
 
-// Donor: Create Donation
-router.post('/', auth, async (req, res) => {
-  // Only donors can create donations
-  if (req.user.role !== 'donor')
-    return res
-      .status(403)
-      .send('Access denied. Only donors can create donations.');
+// Donor: Create Donation - only donors can post.
+router.post('/', auth, async (req, res, next) => {
+  try {
+    if (req.user.role !== 'donor')
+      return res
+        .status(403)
+        .send('Access denied. Only donors can create donations.');
 
-  // Validate request body
-  const { error } = validateDonation(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
+    // Validate request body
+    const { error } = validateDonation(req.body);
+    if (error) return res.status(400).send(error.details[0].message);
 
-  let donation = new Donation({
-    donor: req.user._id, // donor is from logged-in user
-    foodName: req.body.foodName,
-    foodType: req.body.foodType,
-    quantity: req.body.quantity,
-    location: req.body.location,
-    status: 'pending',
-  });
+    let donation = new Donation({
+      donor: req.user._id, // donor is from logged-in user
+      foodName: req.body.foodName,
+      foodType: req.body.foodType,
+      quantity: req.body.quantity,
+      location: req.body.location,
+      status: 'pending',
+    });
 
-  donation = await donation.save(); //saving.
+    donation = await donation.save(); //saving.
 
-  //Getting name and email of donor using populate in response.
-  donation = await donation.populate('donor', '-_id name email');
+    //Getting name and email of donor using populate in response.
+    donation = await donation.populate('donor', '-_id name email');
 
-  res.status(201).json({
-    result: true,
-    message: 'Donation created successfully.',
-    data: donation,
-  });
+    res.status(201).json({
+      result: true,
+      message: 'Donation created successfully.',
+      data: donation,
+    });
+  } catch (execption) {
+    next(execption);
+  }
 });
 
 //NGO Accepts Donations.
-router.put('/:id/accept', auth, authorize('ngo'), async function (req, res) {
-  const id = req.params.id;
-  const donation = await Donation.findById(id);
-  if (!donation) return res.status(404).send('Donation not found.');
-  if (donation.status !== 'pending')
-    return res.status(400).send('Donation already processed.');
+router.put(
+  '/:id/accept',
+  auth,
+  authorize('ngo'),
+  async function (req, res, next) {
+    try {
+      const id = req.params.id;
+      const donation = await Donation.findById(id);
+      if (!donation) return res.status(404).send('Donation not found.');
+      if (donation.status !== 'pending')
+        return res.status(400).send('Donation already processed.');
 
-  donation.status = 'accepted';
-  donation.ngo = req.user._id;
-  await donation.save();
+      donation.status = 'accepted';
+      donation.ngo = req.user._id;
+      await donation.save();
 
-  res.send(donation);
-});
+      res.send(donation);
+    } catch (execption) {
+      next(execption);
+    }
+  }
+);
 
 // NGO: View accepted donations.
-router.get('/my-accepted', auth, authorize('ngo'), async (req, res) => {
-  const donations = await Donation.find({
-    ngo: req.user._id,
-    status: 'accepted',
-  })
-    .populate('donor', '-_id name email')
-    .populate('ngo', '-_id name');
-  res.send(donations);
+router.get('/my-accepted', auth, authorize('ngo'), async (req, res, next) => {
+  try {
+    const donations = await Donation.find({
+      ngo: req.user._id,
+      status: 'accepted',
+    })
+      .populate('donor', '-_id name email')
+      .populate('ngo', '-_id name');
+    res.send(donations);
+  } catch (execption) {
+    next(execption);
+  }
 });
 
 // NGO: View pending donations (not yet accepted)
-router.get('/pending', auth, authorize('ngo'), async (req, res) => {
-  const donations = await Donation.find({ status: 'pending' }).populate(
-    'donor',
-    'name email'
-  );
-  res.send(donations);
+router.get('/pending', auth, authorize('ngo'), async (req, res, next) => {
+  try {
+    const donations = await Donation.find({ status: 'pending' }).populate(
+      'donor',
+      'name email'
+    );
+    res.send(donations);
+  } catch (execption) {
+    next(execption);
+  }
 });
 
 module.exports = router;

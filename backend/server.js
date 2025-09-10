@@ -1,3 +1,4 @@
+const error = require('./middleware/error');
 const donationRoutes = require('./routes/donations');
 const login = require('./routes/login');
 const users = require('./routes/users');
@@ -27,6 +28,7 @@ app.use(morgan('tiny'));
 app.use('/api/users', users);
 app.use('/api/login', login);
 app.use('/api/donations', donationRoutes);
+app.use(error);
 
 //Port.
 const port = process.env.PORT;
