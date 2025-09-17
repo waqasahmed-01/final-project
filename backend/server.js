@@ -1,4 +1,5 @@
 const error = require('./middleware/error');
+const notificationRoutes = require('./routes/notifications');
 const donationRoutes = require('./routes/donations');
 const login = require('./routes/login');
 const users = require('./routes/users');
@@ -28,6 +29,7 @@ app.use(morgan('tiny'));
 app.use('/api/users', users);
 app.use('/api/login', login);
 app.use('/api/donations', donationRoutes);
+app.use('/api/notifications', notificationRoutes);
 app.use(error);
 
 //Port.

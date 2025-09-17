@@ -1,17 +1,37 @@
-[2025-09-10 12:19:32] ERROR: MongoServerSelectionError: connect ECONNREFUSED ::1:27017, connect ECONNREFUSED 127.0.0.1:27017
-    at Topology.selectServer (D:\final-project\backend\node_modules\mongodb\lib\sdam\topology.js:326:38)
-    at async tryOperation (D:\final-project\backend\node_modules\mongodb\lib\operations\execute_operation.js:145:18)
-    at async executeOperation (D:\final-project\backend\node_modules\mongodb\lib\operations\execute_operation.js:75:16)
-    at async FindCursor._initialize (D:\final-project\backend\node_modules\mongodb\lib\cursor\find_cursor.js:61:26)
-    at async FindCursor.cursorInit (D:\final-project\backend\node_modules\mongodb\lib\cursor\abstract_cursor.js:632:27)
-    at async FindCursor.fetchBatch (D:\final-project\backend\node_modules\mongodb\lib\cursor\abstract_cursor.js:666:13)
-    at async FindCursor.next (D:\final-project\backend\node_modules\mongodb\lib\cursor\abstract_cursor.js:342:17)
-    at async Collection.findOne (D:\final-project\backend\node_modules\mongodb\lib\collection.js:277:21)
-    at async model.Query._findOne (D:\final-project\backend\node_modules\mongoose\lib\query.js:2710:15)
-    at async model.Query.exec (D:\final-project\backend\node_modules\mongoose\lib\query.js:4627:63)
-[2025-09-10 12:20:10] INFO: Listening on port http://localhost:3000
-[2025-09-10 12:20:40] ERROR: Could not connected to database: MongooseServerSelectionError: connect ECONNREFUSED ::1:27017, connect ECONNREFUSED 127.0.0.1:27017
-[2025-09-10 12:21:15] INFO: Listening on port http://localhost:3000
-[2025-09-10 12:21:15] INFO: Connected with database...
-[2025-09-10 12:23:38] INFO: Listening on port http://localhost:3000
-[2025-09-10 12:23:38] INFO: Connected with database...
+[2025-09-16 17:49:50] INFO: Listening on port http://localhost:3000
+[2025-09-16 17:49:50] INFO: Connected with database...
+[2025-09-16 17:52:46] INFO: Listening on port http://localhost:3000
+[2025-09-16 17:52:46] INFO: Connected with database...
+[2025-09-16 17:53:10] INFO: Listening on port http://localhost:3000
+[2025-09-16 17:53:10] INFO: Connected with database...
+[2025-09-16 17:53:12] INFO: Listening on port http://localhost:3000
+[2025-09-16 17:53:12] INFO: Connected with database...
+[2025-09-16 17:57:10] INFO: Listening on port http://localhost:3000
+[2025-09-16 17:57:10] INFO: Connected with database...
+[2025-09-16 18:04:51] INFO: Listening on port http://localhost:3000
+[2025-09-16 18:04:51] INFO: Connected with database...
+[2025-09-16 22:29:51] INFO: Listening on port http://localhost:3000
+[2025-09-16 22:29:51] INFO: Connected with database...
+[2025-09-17 17:40:23] INFO: Listening on port http://localhost:3000
+[2025-09-17 17:40:23] INFO: Connected with database...
+[2025-09-17 17:42:18] INFO: Listening on port http://localhost:3000
+[2025-09-17 17:42:18] INFO: Connected with database...
+[2025-09-17 17:42:27] ERROR: ReferenceError: ngo is not defined
+    at D:\final-project\backend\routes\notifications.js:12:63
+    at Layer.handleRequest (D:\final-project\backend\node_modules\router\lib\layer.js:152:17)
+    at next (D:\final-project\backend\node_modules\router\lib\route.js:157:13)
+    at auth (D:\final-project\backend\middleware\auth.js:10:5)
+    at Layer.handleRequest (D:\final-project\backend\node_modules\router\lib\layer.js:152:17)
+    at next (D:\final-project\backend\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (D:\final-project\backend\node_modules\router\lib\route.js:117:3)
+    at handle (D:\final-project\backend\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (D:\final-project\backend\node_modules\router\lib\layer.js:152:17)
+    at D:\final-project\backend\node_modules\router\index.js:295:15
+[2025-09-17 17:42:50] INFO: Listening on port http://localhost:3000
+[2025-09-17 17:42:50] INFO: Connected with database...
+[2025-09-17 17:47:31] INFO: Listening on port http://localhost:3000
+[2025-09-17 17:47:31] INFO: Connected with database...
+[2025-09-17 17:48:45] INFO: Listening on port http://localhost:3000
+[2025-09-17 17:48:45] INFO: Connected with database...
+[2025-09-17 17:51:23] INFO: Listening on port http://localhost:3000
+[2025-09-17 17:51:24] INFO: Connected with database...

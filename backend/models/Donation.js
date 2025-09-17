@@ -65,7 +65,7 @@ function validateDonation(donation) {
 
   return schema.validate(donation);
 }
-
-const Donation = mongoose.model('Donation', donationSchema);
+const Donation =
+  mongoose.models.Donation || mongoose.model('Donation', donationSchema);
 
 module.exports = { Donation, validateDonation };

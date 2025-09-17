@@ -34,7 +34,7 @@ const userSchema = new mongoose.Schema({
 //Authentication Token.
 userSchema.methods.generateAuthToken = function () {
   const token = jwt.sign(
-    { _id: this._id, role: this.role },
+    { _id: this._id, role: this.role }, //name: this.name,
     process.env.JWT_SECRET
   );
 
@@ -42,7 +42,7 @@ userSchema.methods.generateAuthToken = function () {
 };
 
 //Model.
-const User = mongoose.model('User', userSchema);
+const User = mongoose.models.User || mongoose.model('User', userSchema);
 
 //Validations.
 function validateUser(user) {

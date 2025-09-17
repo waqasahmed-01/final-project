@@ -70,6 +70,8 @@ function validateNotification(notification) {
   return schema.validate(notification);
 }
 
-const Notification = mongoose.model('Notification', notificationSchema);
+const Notification =
+  mongoose.models.Notification ||
+  mongoose.model('Notification', notificationSchema);
 
 module.exports = { Notification, validateNotification };
