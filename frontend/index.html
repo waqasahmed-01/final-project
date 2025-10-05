@@ -1,11 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Food Management.</title>
+    <title>Food Management & Waste Reduction</title>
+
+    <!-- Bootstrap CSS from node_modules -->
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./css/style.css">
 </head>
+
 <body>
-    <p>Food Website</p>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">Food Saver</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../frontend/pages/signup.html">Donate</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">NGOs</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero d-flex align-items-center justify-content-center text-center">
+        <div class="text-white">
+            <h1 class="display-4 fw-bold">Reduce Food Waste, Spread Smiles</h1>
+            <p class="lead mt-3">"Every meal shared is a life cared. Together, we can end hunger."</p>
+            <a href="./pages/signup.html" class="btn btn-lg btn-success mt-3">Get Started</a>
+        </div>
+    </section>
+
+    <!-- Quote Section -->
+    <section class="quote-section text-center py-5 bg-light">
+        <div class="container">
+            <p class="quote">"Wasting food is like stealing from the table of those who are poor and hungry." – Pope
+                Francis</p>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features py-5">
+        <div class="container text-center">
+            <h2 class="mb-5">What We Do</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card feature-card h-100 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">Donate Excess Food</h5>
+                            <p class="card-text">Help feed those in need by donating surplus food directly through our
+                                platform.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card feature-card h-100 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">Connect with NGOs</h5>
+                            <p class="card-text">We bridge the gap between donors and NGOs, ensuring food reaches the
+                                right hands.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card feature-card h-100 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">Awareness & Impact</h5>
+                            <p class="card-text">Join our mission to reduce food waste and make a lasting impact in your
+                                community.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-center bg-dark text-white py-3">
+        <div class="container">
+            <p class="mb-0">&copy; 2025 Food Saver | Together Against Food Waste</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS (from node_modules) -->
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

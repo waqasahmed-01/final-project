@@ -1,0 +1,94 @@
+/* Custom CSS for a Professional & Cool Sign Up Page */
+
+body {
+    font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    /* Example: A subtle background pattern or gradient for a cool look */
+    background: linear-gradient(135deg, #e0f2f7 0%, #c1e4f4 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.signup-card {
+    border-radius: 1.5rem;
+    /* More rounded corners */
+    border: none;
+    max-width: 450px;
+    /* Control card width */
+    width: 100%;
+    background-color: #ffffff;
+    /* White card background */
+    backdrop-filter: blur(10px);
+    background-clip: padding-box;
+}
+
+.signup-card .card-title {
+    color: #007bff;
+    /* Bootstrap primary blue */
+    margin-bottom: 1rem;
+}
+
+.signup-card .card-subtitle {
+    font-size: 0.95rem;
+    color: #6c757d;
+}
+
+/* Input field styling */
+.form-control-lg {
+    border-radius: 0.75rem;
+    /* Slightly more rounded inputs */
+    padding: 0.75rem 1.25rem;
+    border: 1px solid #ced4da;
+    transition: all 0.3s ease;
+}
+
+.form-control-lg:focus {
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.25);
+    background-color: #f8f9fa;
+    /* Light background on focus */
+}
+
+/* Custom button gradient for a modern feel */
+.custom-btn-gradient {
+    background: linear-gradient(45deg, #007bff, #0056b3);
+    /* Blue gradient */
+    border: none;
+    border-radius: 0.75rem;
+    font-weight: bold;
+    letter-spacing: 0.05em;
+    padding: 0.75rem 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.custom-btn-gradient:hover {
+    background: linear-gradient(45deg, #0056b3, #007bff);
+    /* Reverse gradient on hover */
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+    transform: translateY(-2px);
+    /* Subtle lift effect */
+}
+
+/* Link styling */
+a {
+    color: #007bff;
+    font-weight: 600;
+}
+
+a:hover {
+    color: #0056b3;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 576px) {
+    .signup-card {
+        margin: 1rem;
+        padding: 2.5rem 1.5rem !important;
+        /* Adjust padding for small screens */
+    }
+
+    .card-title {
+        font-size: 1.75rem;
+    }
+}
