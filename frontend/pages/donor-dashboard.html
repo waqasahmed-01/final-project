@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Donor Dashboard | Food Management</title>
+    <link
+      rel="stylesheet"
+      href="../node_modules/bootstrap/dist/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../css/dashboard.css" />
+  </head>
+  <body>
+    <div class="d-flex" id="wrapper">
+      <!-- Sidebar -->
+      <div class="border-end bg-success text-white" id="sidebar-wrapper">
+        <div
+          class="sidebar-heading text-center py-4 fs-4 fw-bold border-bottom"
+        >
+          🍱 Donor Panel
+        </div>
+        <div class="list-group list-group-flush my-3">
+          <a
+            href="#"
+            class="list-group-item list-group-item-action bg-transparent text-white fw-bold active-link"
+            >🏠 Dashboard</a
+          >
+          <a
+            href="#"
+            class="list-group-item list-group-item-action bg-transparent text-white fw-bold"
+            >📦 My Donations</a
+          >
+          <a
+            href="#"
+            class="list-group-item list-group-item-action bg-transparent text-white fw-bold"
+            >➕ Create Donation</a
+          >
+          <a
+            href="#"
+            class="list-group-item list-group-item-action bg-transparent text-white fw-bold"
+            >👤 Profile</a
+          >
+          <a
+            href="#"
+            class="list-group-item list-group-item-action bg-transparent text-danger fw-bold"
+            >🚪 Logout</a
+          >
+        </div>
+      </div>
+
+      <!-- Page content -->
+      <div id="page-content-wrapper" class="w-100">
+        <nav
+          class="navbar navbar-expand-lg navbar-light bg-light border-bottom shadow-sm"
+        >
+          <div class="container-fluid">
+            <button class="btn btn-success" id="menu-toggle">☰</button>
+            <h4 class="ms-3 mt-2 fw-bold text-success">Welcome, Donor!</h4>
+          </div>
+        </nav>
+
+        <div class="container-fluid px-4 mt-4">
+          <!-- Stats Row -->
+          <div class="row g-4">
+            <div class="col-md-4">
+              <div class="card stat-card shadow-sm border-0">
+                <div class="card-body text-center">
+                  <h5 class="fw-bold text-success">Total Donations</h5>
+                  <h2 class="fw-bold">12</h2>
+                  <small class="text-muted">Overall contributions</small>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="card stat-card shadow-sm border-0">
+                <div class="card-body text-center">
+                  <h5 class="fw-bold text-warning">Pending Approvals</h5>
+                  <h2 class="fw-bold">3</h2>
+                  <small class="text-muted">Awaiting NGO response</small>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="card stat-card shadow-sm border-0">
+                <div class="card-body text-center">
+                  <h5 class="fw-bold text-primary">Accepted Donations</h5>
+                  <h2 class="fw-bold">9</h2>
+                  <small class="text-muted">Successfully delivered</small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Recent Donations Table -->
+          <div class="card shadow-sm mt-5 border-0">
+            <div class="card-header bg-success text-white fw-bold">
+              Recent Donations
+            </div>
+            <div class="card-body">
+              <table class="table table-hover align-middle">
+                <thead class="table-success">
+                  <tr>
+                    <th>#</th>
+                    <th>Food Type</th>
+                    <th>Quantity</th>
+                    <th>Status</th>
+                    <th>Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>Biryani</td>
+                    <td>5 Plates</td>
+                    <td>
+                      <span class="badge bg-warning text-dark">Pending</span>
+                    </td>
+                    <td>Oct 14, 2025</td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>Bread Loaves</td>
+                    <td>20 pcs</td>
+                    <td><span class="badge bg-success">Accepted</span></td>
+                    <td>Oct 10, 2025</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      // Sidebar toggle
+      document
+        .getElementById('menu-toggle')
+        .addEventListener('click', function () {
+          document.getElementById('wrapper').classList.toggle('toggled');
+        });
+
+      // Simple animation for stats
+      document.querySelectorAll('.stat-card h2').forEach((el) => {
+        let count = 0;
+        const target = parseInt(el.innerText);
+        const interval = setInterval(() => {
+          count++;
+          el.innerText = count;
+          if (count >= target) clearInterval(interval);
+        }, 60);
+      });
+    </script>
+  </body>
+</html>

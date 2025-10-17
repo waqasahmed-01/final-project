@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard | Food Management</title>
+    <link
+      rel="stylesheet"
+      href="../node_modules/bootstrap/dist/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../css/dashboard.css" />
+  </head>
+  <body>
+    <div class="d-flex" id="wrapper">
+      <!-- Sidebar -->
+      <div class="border-end bg-success text-white" id="sidebar-wrapper">
+        <div
+          class="sidebar-heading text-center py-4 fs-4 fw-bold border-bottom"
+        >
+          🛠️ Admin Panel
+        </div>
+        <div class="list-group list-group-flush my-3">
+          <a
+            href="#"
+            class="list-group-item list-group-item-action bg-transparent text-white fw-bold"
+            >🏠 Home</a
+          >
+          <a
+            href="#"
+            class="list-group-item list-group-item-action bg-transparent text-white fw-bold"
+            >📋 NGO Requests</a
+          >
+          <a
+            href="#"
+            class="list-group-item list-group-item-action bg-transparent text-white fw-bold"
+            >🍲 All Donations</a
+          >
+          <a
+            href="#"
+            class="list-group-item list-group-item-action bg-transparent text-white fw-bold"
+            >👥 All Users</a
+          >
+          <a
+            href="#"
+            class="list-group-item list-group-item-action bg-transparent text-danger fw-bold"
+            >🚪 Logout</a
+          >
+        </div>
+      </div>
+
+      <!-- Page content -->
+      <div id="page-content-wrapper" class="w-100">
+        <nav
+          class="navbar navbar-expand-lg navbar-light bg-light border-bottom"
+        >
+          <div class="container-fluid">
+            <button class="btn btn-success" id="menu-toggle">☰</button>
+            <h4 class="ms-3 mt-2 fw-bold">Welcome, Admin!</h4>
+          </div>
+        </nav>
+
+        <div class="container-fluid px-4 mt-4">
+          <h3 class="fw-bold text-success mb-3">Pending NGO Approvals</h3>
+          <div class="card shadow-sm mb-4">
+            <div class="card-body">
+              <table class="table table-hover align-middle">
+                <thead class="table-success">
+                  <tr>
+                    <th>#</th>
+                    <th>NGO Name</th>
+                    <th>Email</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>Helping Hands</td>
+                    <td>helpinghands@gmail.com</td>
+                    <td>
+                      <button class="btn btn-success btn-sm">Approve</button>
+                      <button class="btn btn-danger btn-sm">Reject</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <h3 class="fw-bold text-success mb-3">All Users</h3>
+          <div class="card shadow-sm">
+            <div class="card-body">
+              <table class="table table-striped">
+                <thead class="table-success">
+                  <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Role</th>
+                    <th>Email</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>Ali Khan</td>
+                    <td>Donor</td>
+                    <td>ali@gmail.com</td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>Helping Hands</td>
+                    <td>NGO</td>
+                    <td>helpinghands@gmail.com</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      document
+        .getElementById('menu-toggle')
+        .addEventListener('click', function () {
+          document.getElementById('wrapper').classList.toggle('toggled');
+        });
+    </script>
+  </body>
+</html>

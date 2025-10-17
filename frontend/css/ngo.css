@@ -1,0 +1,9 @@
+.ngo-bg {
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+        url('../images/ngo-bg.jpeg') center/cover no-repeat fixed;
+    font-family: 'Poppins', sans-serif;
+}
+
+.card {
+    border-radius: 15px;
+}
