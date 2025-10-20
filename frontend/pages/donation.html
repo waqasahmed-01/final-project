@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create Donation | Food Management</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="../node_modules/bootstrap/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/donation.css" />
+
+    <style>
+      body {
+        background: linear-gradient(to bottom right, #f8f9fa, #e9ecef);
+        font-family: 'Poppins', sans-serif;
+      }
+
+      .donation-form-container {
+        max-width: 700px;
+        margin: 50px auto;
+        background: #fff;
+        border-radius: 15px;
+        padding: 40px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .donation-form-container h2 {
+        text-align: center;
+        margin-bottom: 30px;
+        color: #007bff;
+        font-weight: 600;
+      }
+
+      label {
+        font-weight: 500;
+      }
+
+      .btn-donate {
+        background-color: #007bff;
+        border: none;
+        width: 100%;
+        padding: 12px;
+        border-radius: 10px;
+        color: white;
+        font-weight: 600;
+        transition: all 0.3s ease;
+      }
+
+      .btn-donate:hover {
+        background-color: #0056b3;
+        transform: translateY(-2px);
+      }
+
+      .form-control:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container donation-form-container">
+      <h2>Create a Donation</h2>
+
+      <form>
+        <div class="mb-3">
+          <label for="foodName" class="form-label">Food Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="foodName"
+            placeholder="e.g. Cooked Rice, Bread, Fruits"
+            required
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="quantity" class="form-label">Quantity / Meals</label>
+          <input
+            type="number"
+            class="form-control"
+            id="quantity"
+            placeholder="e.g. 10"
+            required
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="pickupAddress" class="form-label">Pickup Address</label>
+          <textarea
+            class="form-control"
+            id="pickupAddress"
+            rows="3"
+            placeholder="Enter full address"
+            required
+          ></textarea>
+        </div>
+
+        <div class="mb-3">
+          <label for="expiryTime" class="form-label">Food Expiry Time</label>
+          <input
+            type="datetime-local"
+            class="form-control"
+            id="expiryTime"
+            required
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="foodImage" class="form-label"
+            >Upload Image (optional)</label
+          >
+          <input
+            type="file"
+            class="form-control"
+            id="foodImage"
+            accept="image/*"
+          />
+        </div>
+
+        <button type="submit" class="btn btn-donate">Submit Donation</button>
+      </form>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

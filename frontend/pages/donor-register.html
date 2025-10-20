@@ -1,32 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Donor Register - Food Management</title>
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/donor.css">
-</head>
+    <link
+      rel="stylesheet"
+      href="../node_modules/bootstrap/dist/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../css/donor.css" />
+  </head>
 
-<body class="donor-bg">
-    <div class="container vh-100 d-flex flex-column justify-content-center align-items-center">
-        <h1 class="text-light mb-3 fw-bold">Be the reason someone smiles today 🌟</h1>
-        <div class="card p-4 shadow-lg bg-light" style="width: 400px;">
-            <h4 class="text-center mb-3 text-primary">Donor Registration</h4>
-            <form>
-                <input type="text" class="form-control mb-3" placeholder="Full Name" required>
-                <input type="email" class="form-control mb-3" placeholder="Email" required>
-                <input type="password" class="form-control mb-3" placeholder="Password" required>
-                <button class="btn btn-primary w-100">Register</button>
-            </form>
-            <p class="text-center mt-3">Already have an account? <a href="./donor-login.html">Login</a></p>
-        </div>
+  <body class="donor-bg">
+    <div
+      class="container vh-100 d-flex flex-column justify-content-center align-items-center"
+    >
+      <h1 class="text-light mb-3 fw-bold">
+        Be the reason someone smiles today 🌟
+      </h1>
+      <div class="card p-4 shadow-lg bg-light" style="width: 400px">
+        <h4 class="text-center mb-3 text-primary">Donor Registration</h4>
+        <form>
+          <input
+            type="text"
+            id="full-name"
+            class="form-control mb-3"
+            placeholder="Full Name"
+            required
+          />
+          <input
+            type="email"
+            id="email"
+            class="form-control mb-3"
+            placeholder="Email"
+            required
+          />
+          <input
+            type="password"
+            id="password"
+            class="form-control mb-3"
+            placeholder="Password"
+            required
+          />
+          <button class="btn btn-primary w-100" id="register-form">
+            Register
+          </button>
+        </form>
+        <p class="text-center mt-3">
+          Already have an account? <a href="./donor-login.html">Login</a>
+        </p>
+      </div>
     </div>
 
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-
+    <script src="../js/donor-register.js"></script>
+  </body>
 </html>
