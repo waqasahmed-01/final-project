@@ -27,6 +27,13 @@ router.post('/', async function (req, res, next) {
         .status(400)
         .json({ success: false, message: 'Invalid email or password' });
 
+    // NGO login blocked if not yet approved
+    if (user.role === 'ngo' && !user.isApproved)
+      return res.status(403).json({
+        success: false,
+        message: 'Your NGO registration is pending admin approval.',
+      });
+
     const token = user.generateAuthToken();
     return res.status(200).json({
       success: true,
@@ -37,8 +44,8 @@ router.post('/', async function (req, res, next) {
       },
       token: token,
     });
-  } catch (execption) {
-    next(execption);
+  } catch (exception) {
+    next(exception);
   }
 });
 

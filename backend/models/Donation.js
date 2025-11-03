@@ -1,12 +1,13 @@
+// backend/models/Donation.js
 const mongoose = require('mongoose');
 const Joi = require('joi');
 Joi.objectId = require('joi-objectid')(Joi);
 
-//Donation Schema.
+// Donation Schema.
 const donationSchema = new mongoose.Schema({
   foodName: {
     type: String,
-    require: true,
+    required: true,
     trim: true,
   },
   foodType: {
@@ -15,7 +16,7 @@ const donationSchema = new mongoose.Schema({
     required: true,
   },
   quantity: {
-    type: String, // Example: "5 kg", "10 meals"
+    type: String,
     required: true,
     trim: true,
   },
@@ -36,7 +37,7 @@ const donationSchema = new mongoose.Schema({
   },
   ngo: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User', // NGO will also be from User collection
+    ref: 'User',
     default: null,
   },
   createdAt: {
@@ -45,26 +46,24 @@ const donationSchema = new mongoose.Schema({
   },
 });
 
-//Joi Validation.
 function validateDonation(donation) {
   const schema = Joi.object({
     foodName: Joi.string().min(3).max(255).required(),
     foodType: Joi.string().valid('cooked', 'raw', 'packaged').required(),
-    quantity: Joi.string().min(1).max(50).required(),
+    quantity: Joi.alternatives()
+      .try(Joi.string().min(1).max(50), Joi.number().min(1))
+      .required(),
     location: Joi.string().min(3).max(255).required(),
-    status: Joi.string().valid(
-      'pending',
-      'accepted',
-      'picked-up',
-      'completed',
-      'rejected'
-    ),
-    donor: Joi.objectId().required(),
-    ngo: Joi.objectId().allow(null),
+    status: Joi.string()
+      .valid('pending', 'accepted', 'picked-up', 'completed', 'rejected')
+      .optional(),
+    ngo: Joi.objectId().allow(null).optional(),
+    donor: Joi.objectId().optional(),
   });
 
   return schema.validate(donation);
 }
+
 const Donation =
   mongoose.models.Donation || mongoose.model('Donation', donationSchema);
 
