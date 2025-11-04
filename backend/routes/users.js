@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt');
 const express = require('express');
 const router = express.Router();
 
-// ✅ Get current user profile
+// Get current user profile
 router.get('/me', auth, async (req, res, next) => {
   try {
     const user = await User.findById(req.user._id).select('-password');
@@ -15,7 +15,7 @@ router.get('/me', auth, async (req, res, next) => {
   }
 });
 
-// ✅ Register new user (Donor or NGO)
+//  Register new user (Donor or NGO)
 router.post('/', async (req, res, next) => {
   try {
     const { error } = validate(req.body);
