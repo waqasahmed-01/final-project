@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Donations | Food Management</title>
+
+    <link
+      href="../node_modules/bootstrap/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        background: #f5f7fa;
+        font-family: 'Poppins', sans-serif;
+      }
+      .donation-card {
+        border-radius: 18px;
+        background: #fff;
+        padding: 20px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        transition: 0.2s;
+      }
+      .donation-card:hover {
+        transform: translateY(-3px);
+      }
+      .status-badge {
+        padding: 6px 10px;
+        border-radius: 6px;
+        font-size: 0.85rem;
+        font-weight: 600;
+      }
+      .msg-box {
+        display: none;
+        padding: 12px;
+        border-radius: 8px;
+        font-weight: 500;
+      }
+      .msg-error {
+        background: #ffebee;
+        color: #c62828;
+        border-left: 4px solid #c62828;
+      }
+    </style>
+  </head>
+
+  <body class="p-4">
+    <h2 class="fw-bold mb-4 text-primary text-center">My Donations</h2>
+
+    <p id="messageBox" class="msg-box msg-error text-center"></p>
+
+    <div class="container">
+      <div id="donationsList" class="row gy-4"></div>
+    </div>
+
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/donor-donations.js"></script>
+  </body>
+</html>

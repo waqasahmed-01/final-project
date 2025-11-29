@@ -6,6 +6,7 @@ const users = require('./routes/users');
 const mongoose = require('mongoose');
 const logger = require('./logger');
 const morgan = require('morgan');
+const cors = require('cors');
 require('dotenv').config();
 const express = require('express');
 const app = express();
@@ -20,6 +21,9 @@ mongoose
   .connect(process.env.DATABASE_URL)
   .then(() => logger.info('Connected with database...'))
   .catch((error) => logger.error('Could not connected to database: ' + error));
+
+//Enabling cors.
+app.use(cors());
 
 //Middlewares.
 app.use(express.json());

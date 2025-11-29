@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pending Donations | NGO Panel</title>
+
+    <link
+      href="../node_modules/bootstrap/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        background: #eef2f7;
+        font-family: 'Poppins', sans-serif;
+      }
+      .donation-card {
+        background: #fff;
+        padding: 22px;
+        border-radius: 16px;
+        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.08);
+      }
+      .btn-accept {
+        background: #2e7d32;
+        color: white;
+        border-radius: 10px;
+        padding: 8px 18px;
+        transition: 0.2s;
+      }
+      .btn-accept:hover {
+        background: #1b5e20;
+      }
+      .btn-reject {
+        background: #c62828;
+        color: white;
+        border-radius: 10px;
+        padding: 8px 18px;
+      }
+      .msg {
+        display: none;
+        padding: 12px;
+        border-radius: 8px;
+        font-weight: 500;
+        margin-bottom: 20px;
+      }
+      .msg-error {
+        background: #ffebee;
+        color: #c62828;
+        border-left: 4px solid #c62828;
+      }
+      .msg-success {
+        background: #e8f5e9;
+        color: #2e7d32;
+        border-left: 4px solid #2e7d32;
+      }
+    </style>
+  </head>
+
+  <body class="p-4">
+    <h2 class="fw-bold text-center mb-4 text-success">Pending Donations</h2>
+
+    <p id="msgBox" class="msg text-center"></p>
+
+    <div class="container">
+      <div id="pendingList" class="row gy-4"></div>
+    </div>
+
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/ngo-pending.js"></script>
+  </body>
+</html>
