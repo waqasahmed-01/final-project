@@ -34,7 +34,8 @@ router.post('/', async (req, res, next) => {
       name: req.body.name,
       email: req.body.email,
       password: req.body.password,
-      role: req.body.role || 'donor',
+      // role: req.body.role || 'donor',
+      role: req.body.role || 'ngo',
     });
 
     // Hash password

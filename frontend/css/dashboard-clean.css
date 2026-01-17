@@ -1,0 +1,13 @@
+.dashboard-bg {
+  background: linear-gradient(to bottom right, #f8f9fa, #e9ecef);
+  min-height: 100vh;
+}
+
+.card {
+  border-radius: 12px;
+}
+
+.btn-lg {
+  padding: 14px;
+  font-size: 1.1rem;
+}

@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt');
-const { User } = require('../models/user');
+const { User } = require('../models/User');
 const Joi = require('joi');
 const express = require('express');
 const router = express.Router();
@@ -26,13 +26,6 @@ router.post('/', async function (req, res, next) {
       return res
         .status(400)
         .json({ success: false, message: 'Invalid email or password' });
-
-    // NGO login blocked if not yet approved
-    if (user.role === 'ngo' && !user.isApproved)
-      return res.status(403).json({
-        success: false,
-        message: 'Your NGO registration is pending admin approval.',
-      });
 
     const token = user.generateAuthToken();
     return res.status(200).json({

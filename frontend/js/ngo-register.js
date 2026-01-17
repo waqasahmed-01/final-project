@@ -1,9 +1,21 @@
 // ngo-register.js
 
-const API_BASE = 'http://localhost:5000/api';
+const API_BASE = 'http://localhost:3000';
+const form = document.querySelector('form');
+const finalMsg = document.getElementById('final');
 
-document.querySelector('button').addEventListener('click', async (e) => {
+function showMessage(message, type = 'error') {
+  finalMsg.textContent = message;
+  finalMsg.style.color = type === 'success' ? 'green' : 'red';
+}
+
+function isValidEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+form.addEventListener('submit', async (e) => {
   e.preventDefault();
+  finalMsg.textContent = '';
 
   const name = document
     .querySelector("input[placeholder='NGO Name']")
@@ -15,13 +27,29 @@ document.querySelector('button').addEventListener('click', async (e) => {
     .querySelector("input[placeholder='Password']")
     .value.trim();
 
+  // ✅ CLIENT-SIDE VALIDATION
   if (!name || !email || !password) {
-    alert('All fields are required.');
+    showMessage('All fields are required.');
+    return;
+  }
+
+  if (name.length < 3) {
+    showMessage('NGO name must be at least 3 characters.');
+    return;
+  }
+
+  if (!isValidEmail(email)) {
+    showMessage('Please enter a valid email address.');
+    return;
+  }
+
+  if (password.length < 6) {
+    showMessage('Password must be at least 6 characters.');
     return;
   }
 
   try {
-    const res = await fetch(`${API_BASE}/users`, {
+    const res = await fetch(`${API_BASE}/api/ngo-signup`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -37,14 +65,17 @@ document.querySelector('button').addEventListener('click', async (e) => {
     const data = await res.json();
 
     if (!res.ok) {
-      alert(data.message || 'NGO registration failed.');
+      showMessage(data.message || 'NGO registration failed.');
       return;
     }
 
-    alert('NGO registered successfully! Waiting for admin approval.');
-    window.location.href = './ngo-login.html';
+    showMessage('NGO registered successfully! Redirecting...', 'success');
+
+    setTimeout(() => {
+      window.location.href = './ngo-login.html';
+    }, 1200);
   } catch (err) {
     console.error(err);
-    alert('Something went wrong. Try again.');
+    showMessage('Server not responding. Please try again later.');
   }
 });

@@ -4,111 +4,73 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>NGO Dashboard | Food Management</title>
+
     <link
       rel="stylesheet"
       href="../node_modules/bootstrap/dist/css/bootstrap.min.css"
     />
-    <link rel="stylesheet" href="../css/dashboard.css" />
+    <link rel="stylesheet" href="../css/dashboard-clean.css" />
   </head>
-  <body>
-    <div class="d-flex" id="wrapper">
-      <!-- Sidebar -->
-      <div class="border-end bg-success text-white" id="sidebar-wrapper">
-        <div
-          class="sidebar-heading text-center py-4 fs-4 fw-bold border-bottom"
-        >
-          🏢 NGO Panel
-        </div>
-        <div class="list-group list-group-flush my-3">
-          <a
-            href="#"
-            class="list-group-item list-group-item-action bg-transparent text-white fw-bold"
-            >🏠 Home</a
-          >
-          <a
-            href="#"
-            class="list-group-item list-group-item-action bg-transparent text-white fw-bold"
-            >📦 Available Donations</a
-          >
-          <a
-            href="#"
-            class="list-group-item list-group-item-action bg-transparent text-white fw-bold"
-            >✅ My Responses</a
-          >
-          <a
-            href="#"
-            class="list-group-item list-group-item-action bg-transparent text-white fw-bold"
-            >👤 Profile</a
-          >
-          <a
-            href="#"
-            class="list-group-item list-group-item-action bg-transparent text-danger fw-bold"
-            >🚪 Logout</a
-          >
-        </div>
-      </div>
 
-      <!-- Page content -->
-      <div id="page-content-wrapper" class="w-100">
-        <nav
-          class="navbar navbar-expand-lg navbar-light bg-light border-bottom"
-        >
-          <div class="container-fluid">
-            <button class="btn btn-success" id="menu-toggle">☰</button>
-            <h4 class="ms-3 mt-2 fw-bold">Welcome, NGO Member!</h4>
-          </div>
-        </nav>
+  <body class="dashboard-bg">
+    <nav class="navbar navbar-light bg-white shadow-sm px-4">
+      <span class="navbar-brand fw-bold text-success"> 🏢 NGO Dashboard </span>
+      <button class="btn btn-outline-danger btn-sm">Logout</button>
+    </nav>
 
-        <div class="container-fluid px-4 mt-4">
-          <h3 class="fw-bold text-success mb-3">Available Donations</h3>
-          <div class="card shadow-sm">
-            <div class="card-body">
-              <table class="table table-hover align-middle">
-                <thead class="table-success">
-                  <tr>
-                    <th>#</th>
-                    <th>Donor</th>
-                    <th>Food Type</th>
-                    <th>Quantity</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>Ali Khan</td>
-                    <td>Cooked Rice</td>
-                    <td>10 Plates</td>
-                    <td>
-                      <button class="btn btn-success btn-sm">Accept</button>
-                      <button class="btn btn-danger btn-sm">Reject</button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>Sara Ahmed</td>
-                    <td>Bread</td>
-                    <td>15 Loaves</td>
-                    <td>
-                      <button class="btn btn-success btn-sm">Accept</button>
-                      <button class="btn btn-danger btn-sm">Reject</button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
+    <div class="container mt-5">
+      <h3 class="fw-bold mb-3">Available Donations</h3>
+
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <table class="table align-middle">
+            <thead class="table-success">
+              <tr>
+                <th>#</th>
+                <th>Donor</th>
+                <th>Food</th>
+                <th>Quantity</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Sample row (will be dynamic later) -->
+              <tr>
+                <td>1</td>
+                <td>Ali Khan</td>
+                <td>Cooked Rice</td>
+                <td>10 Plates</td>
+                <td>
+                  <button
+                    class="btn btn-success btn-sm me-2"
+                    onclick="handleAccept()"
+                  >
+                    Accept
+                  </button>
+                  <button
+                    class="btn btn-danger btn-sm"
+                    onclick="handleReject()"
+                  >
+                    Reject
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
 
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
     <script>
-      document
-        .getElementById('menu-toggle')
-        .addEventListener('click', function () {
-          document.getElementById('wrapper').classList.toggle('toggled');
-        });
+      function handleAccept() {
+        alert('Donation accepted. Rider is on the way 🚚');
+      }
+
+      function handleReject() {
+        alert('Donation rejected.');
+      }
     </script>
   </body>
 </html>

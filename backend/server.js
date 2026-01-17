@@ -3,6 +3,7 @@ const donationRoutes = require('./routes/donations');
 const adminRoutes = require('./routes/admin');
 const login = require('./routes/login');
 const users = require('./routes/users');
+const ngos = require('./routes/ngo-signup');
 const mongoose = require('mongoose');
 const logger = require('./logger');
 const morgan = require('morgan');
@@ -31,6 +32,7 @@ app.use(morgan('tiny'));
 
 //Handling Routes.
 app.use('/api/users', users);
+app.use('/api/ngo-signup', ngos);
 app.use('/api/login', login);
 app.use('/api/donations', donationRoutes);
 app.use('/api/admin', adminRoutes);

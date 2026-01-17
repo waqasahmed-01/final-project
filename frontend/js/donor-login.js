@@ -1,17 +1,47 @@
 // donor-login.js
 
-const API_BASE = 'http://localhost:3000/api';
+const API_BASE = 'http://localhost:3000';
+const form = document.querySelector('form');
+const finalMsg = document.getElementById('final');
 
-document.querySelector('form').addEventListener('submit', async (e) => {
+// show message in <p id="final">
+function showMessage(message, type = 'error') {
+  finalMsg.textContent = message;
+  finalMsg.style.color = type === 'success' ? 'green' : 'red';
+}
+
+// simple email validation
+function isValidEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+form.addEventListener('submit', async (e) => {
   e.preventDefault();
+  finalMsg.textContent = '';
 
   const email = document.querySelector("input[type='email']").value.trim();
   const password = document
     .querySelector("input[type='password']")
     .value.trim();
 
+  // CLIENT-SIDE VALIDATION
+  if (!email || !password) {
+    showMessage('Email and password are required.');
+    return;
+  }
+
+  if (!isValidEmail(email)) {
+    showMessage('Please enter a valid email address.');
+    return;
+  }
+
+  if (password.length < 6) {
+    showMessage('Password must be at least 6 characters.');
+    return;
+  }
+
   try {
-    const res = await fetch(`${API_BASE}/login`, {
+    const res = await fetch(`${API_BASE}/api/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -22,19 +52,29 @@ document.querySelector('form').addEventListener('submit', async (e) => {
     const data = await res.json();
 
     if (!res.ok) {
-      alert(data.message || 'Login failed.');
+      showMessage(data.message || 'Invalid email or password.');
       return;
     }
 
-    // store token and role
+    //STORE AUTH DATA
     localStorage.setItem('token', data.token);
     localStorage.setItem('role', data.profile.role);
     localStorage.setItem('name', data.profile.user);
 
-    alert('Login successful!');
-    window.location.href = './donor-dashboard.html';
+    showMessage('Login successful! Redirecting...', 'success');
+
+    // REDIRECT BASED ON ROLE (SAFE)
+    setTimeout(() => {
+      if (data.profile.role === 'donor') {
+        window.location.href = './donor-dashboard.html';
+      } else if (data.profile.role === 'ngo') {
+        window.location.href = './ngo-dashboard.html';
+      } else {
+        window.location.href = './index.html';
+      }
+    }, 1000);
   } catch (err) {
     console.error(err);
-    alert('Error connecting to server.');
+    showMessage('Server not responding. Please try again later.');
   }
 });

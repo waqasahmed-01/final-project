@@ -24,30 +24,17 @@
       .donation-card {
         width: 100%;
         max-width: 650px;
-        background: rgba(255, 255, 255, 0.9);
-        backdrop-filter: blur(12px);
-        border-radius: 20px;
-        padding: 35px;
-        box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1);
-        animation: fadeIn 0.6s ease;
-      }
-
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-          transform: translateY(10px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 18px;
+        padding: 36px;
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
       }
 
       .donation-card h2 {
         font-weight: 700;
         text-align: center;
-        margin-bottom: 1.5rem;
-        color: #007bff;
+        margin-bottom: 1.8rem;
+        color: #198754;
       }
 
       .form-label {
@@ -60,21 +47,16 @@
         border-radius: 12px;
         font-weight: 600;
         font-size: 1rem;
-        background: #007bff;
+        background: #198754;
         border: none;
-        transition: 0.3s ease-in-out;
+        transition: all 0.2s ease;
       }
 
       .btn-donate:hover {
-        background: #0056b3;
-        transform: translateY(-2px);
+        background: #146c43;
+        transform: translateY(-1px);
       }
 
-      .badge-type {
-        font-size: 0.8rem;
-        padding: 6px 10px;
-        border-radius: 8px;
-      }
       #formMessage {
         padding: 10px 14px;
         border-radius: 8px;
@@ -98,10 +80,9 @@
 
   <body>
     <div class="donation-card">
-      <h2>Donate Food & Feed Lives 🍲💙</h2>
+      <h2>Donate Food & Feed Lives 🍲</h2>
 
-      <form id="donationForm">
-        <!-- Food Name -->
+      <form id="donationForm" novalidate>
         <div class="mb-3">
           <label class="form-label">Food Name</label>
           <input
@@ -109,34 +90,29 @@
             id="foodName"
             class="form-control"
             placeholder="e.g., Biryani, Bread, Fruits"
-            required
           />
         </div>
 
-        <!-- Food Type -->
         <div class="mb-3">
           <label class="form-label">Food Type</label>
-          <select id="foodType" class="form-select" required>
-            <option value="" disabled selected>Select Food Type</option>
+          <select id="foodType" class="form-select">
+            <option value="" selected disabled>Select Food Type</option>
             <option value="cooked">🍛 Cooked</option>
             <option value="raw">🥬 Raw</option>
             <option value="packaged">📦 Packaged</option>
           </select>
         </div>
 
-        <!-- Quantity -->
         <div class="mb-3">
-          <label class="form-label">Quantity / Meals</label>
+          <label class="form-label">Quantity</label>
           <input
             type="text"
             id="quantity"
             class="form-control"
-            placeholder="e.g., 10 plates, 5kg, 3 packs"
-            required
+            placeholder="e.g., 10 plates, 5kg"
           />
         </div>
 
-        <!-- Pickup Address -->
         <div class="mb-3">
           <label class="form-label">Pickup Location</label>
           <textarea
@@ -144,13 +120,14 @@
             class="form-control"
             rows="3"
             placeholder="Enter pickup address"
-            required
           ></textarea>
         </div>
+
         <p id="formMessage" class="text-center fw-semibold mt-2"></p>
 
-        <!-- Submit btn -->
-        <button type="submit" class="btn btn-donate">Submit Donation</button>
+        <button type="submit" class="btn btn-donate mt-2">
+          Submit Donation
+        </button>
       </form>
     </div>
 

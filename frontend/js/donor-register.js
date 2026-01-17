@@ -1,42 +1,70 @@
+const form = document.querySelector('form');
 const finalMsg = document.getElementById('final');
-// Helper to show messages in <p id="final">
-function showMessage(msg, color) {
-  finalMsg.textContent = msg;
-  finalMsg.style.color = color;
+
+function showMessage(message, type = 'error') {
+  finalMsg.textContent = message;
+  finalMsg.style.color = type === 'success' ? 'green' : 'red';
 }
-document
-  .getElementById('register-form')
-  .addEventListener('click', async (event) => {
-    event.preventDefault();
-    const name = document.getElementById('full-name').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const password = document.getElementById('password').value.trim();
-    if (!name || !email || !password) {
-      showMessage('All fields are required.', red);
+
+// Simple email validation
+function isValidEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+form.addEventListener('submit', async (event) => {
+  event.preventDefault();
+  finalMsg.textContent = '';
+
+  const name = document.getElementById('full-name').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const password = document.getElementById('password').value.trim();
+
+  // CLIENT-SIDE VALIDATION
+  if (!name || !email || !password) {
+    showMessage('All fields are required.');
+    return;
+  }
+
+  if (name.length < 3) {
+    showMessage('Name must be at least 3 characters.');
+    return;
+  }
+
+  if (!isValidEmail(email)) {
+    showMessage('Please enter a valid email address.');
+    return;
+  }
+
+  if (password.length < 6) {
+    showMessage('Password must be at least 6 characters.');
+    return;
+  }
+
+  try {
+    const res = await fetch('http://localhost:3000/api/users', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name,
+        email,
+        password,
+        role: 'donor',
+      }),
+    });
+
+    if (!res.ok) {
+      // Generic backend error (duplicate email, etc.)
+      showMessage('Registration failed. Email may already be registered.');
+      return;
     }
-    try {
-      const res = await fetch('http://localhost:3000/api/users', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name,
-          email,
-          password,
-          role: 'donor',
-        }),
-      });
-      const data = await res.json();
-      if (!res.ok) {
-        return showMessage(data.message || 'Registration failed', 'red');
-      }
-      localStorage.setItem('token', data.token);
-      localStorage.setItem('user', JSON.stringify(data.data));
-      alert('Registration successful!');
+
+    showMessage('Registration successful! Redirecting...', 'success');
+
+    setTimeout(() => {
       window.location.href = './donor-login.html';
-    } catch (err) {
-      console.error(err);
-      showMessage('Server not responding. Try again later.', 'red');
-    }
-  });
+    }, 1200);
+  } catch (error) {
+    console.error(error);
+    showMessage('Server not responding. Please try again later.');
+  }
+});

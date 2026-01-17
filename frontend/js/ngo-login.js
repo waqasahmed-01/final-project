@@ -1,17 +1,45 @@
 // ngo-login.js
 
-const API_BASE = 'http://localhost:3000/api';
+const API_BASE = 'http://localhost:3000';
+const form = document.querySelector('form');
+const finalMsg = document.getElementById('final');
 
-document.querySelector('form').addEventListener('submit', async (e) => {
+function showMessage(message, type = 'error') {
+  finalMsg.textContent = message;
+  finalMsg.style.color = type === 'success' ? 'green' : 'red';
+}
+
+function isValidEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+form.addEventListener('submit', async (e) => {
   e.preventDefault();
+  finalMsg.textContent = '';
 
   const email = document.querySelector("input[type='email']").value.trim();
   const password = document
     .querySelector("input[type='password']")
     .value.trim();
 
+  // ✅ CLIENT-SIDE VALIDATION
+  if (!email || !password) {
+    showMessage('Email and password are required.');
+    return;
+  }
+
+  if (!isValidEmail(email)) {
+    showMessage('Please enter a valid email address.');
+    return;
+  }
+
+  if (password.length < 6) {
+    showMessage('Password must be at least 6 characters.');
+    return;
+  }
+
   try {
-    const res = await fetch(`${API_BASE}/login`, {
+    const res = await fetch(`${API_BASE}/api/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -22,22 +50,28 @@ document.querySelector('form').addEventListener('submit', async (e) => {
     const data = await res.json();
 
     if (!res.ok) {
-      alert(data.message || 'Login failed.');
+      showMessage(data.message || 'Invalid email or password.');
       return;
     }
 
-    // NGO approval check (your backend already rejects if not approved)
-    if (data.profile.role === 'ngo') {
-      alert('Login successful!');
+    // ✅ ensure NGO role
+    if (data.profile.role !== 'ngo') {
+      showMessage('Access denied. Not an NGO account.');
+      return;
     }
 
+    // ✅ store auth info
     localStorage.setItem('token', data.token);
     localStorage.setItem('role', data.profile.role);
     localStorage.setItem('name', data.profile.user);
 
-    window.location.href = './ngo-dashboard.html';
+    showMessage('Login successful! Redirecting...', 'success');
+
+    setTimeout(() => {
+      window.location.href = './ngo-dashboard.html';
+    }, 1000);
   } catch (err) {
     console.error(err);
-    alert('Error connecting to the server.');
+    showMessage('Server not responding. Please try again later.');
   }
 });

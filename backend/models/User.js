@@ -26,13 +26,7 @@ const userSchema = new mongoose.Schema({
   role: {
     type: String,
     enum: ['donor', 'ngo', 'admin'],
-    default: 'donor',
-  },
-  isApproved: {
-    type: Boolean,
-    default: function () {
-      return this.role === 'ngo' ? false : true;
-    },
+    // default: 'donor',
   },
 });
 
