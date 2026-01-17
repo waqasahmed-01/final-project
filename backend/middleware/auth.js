@@ -11,7 +11,6 @@ function auth(req, res, next) {
   try {
     const decodedPayload = jwt.verify(token, process.env.JWT_SECRET);
     req.user = decodedPayload;
-    // console.log('USER FROM TOKEN:', req.user);
     next();
   } catch (ex) {
     return res.status(401).send('Invalid or expired token');

@@ -38,10 +38,38 @@ router.get(
 router.get('/pending', auth, authorize('ngo'), async (req, res, next) => {
   try {
     const pendingDonations = await Donation.find({ status: 'pending' })
-      .populate('donor', 'name email location')
+      .populate('donor', 'name email')
       .sort({ createdAt: -1 });
 
-    res.send(pendingDonations);
+    res.status(200).json(pendingDonations);
+  } catch (err) {
+    next(err);
+  }
+});
+
+//Accept and reject flow.
+router.patch('/:id/status', auth, authorize('ngo'), async (req, res, next) => {
+  try {
+    const { status } = req.body;
+
+    if (!['accepted', 'rejected'].includes(status)) {
+      return res.status(400).send('Invalid status');
+    }
+
+    const donation = await Donation.findByIdAndUpdate(
+      req.params.id,
+      { status, ngo: req.user._id },
+      { new: true }
+    );
+
+    if (!donation) {
+      return res.status(404).send('Donation not found');
+    }
+
+    res.status(200).json({
+      message: `Donation ${status}`,
+      donation,
+    });
   } catch (err) {
     next(err);
   }
