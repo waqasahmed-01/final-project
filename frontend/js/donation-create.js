@@ -78,11 +78,14 @@ form.addEventListener('submit', async (e) => {
       return;
     }
 
-    showMessage('success', 'Donation created successfully! 🎉');
+    showMessage(
+      'success',
+      'Donation created successfully! Redirecting to dashboard...',
+    );
 
     setTimeout(() => {
       window.location.href = './donor-dashboard.html';
-    }, 5000);
+    }, 4000);
   } catch (err) {
     console.error(err);
     showMessage('error', 'Server error. Please try again later.');

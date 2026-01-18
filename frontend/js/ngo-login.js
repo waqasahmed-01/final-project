@@ -18,9 +18,7 @@ form.addEventListener('submit', async (e) => {
   finalMsg.textContent = '';
 
   const email = document.querySelector("input[type='email']").value.trim();
-  const password = document
-    .querySelector("input[type='password']")
-    .value.trim();
+  const password = document.getElementById('password').value.trim();
 
   // ✅ CLIENT-SIDE VALIDATION
   if (!email || !password) {

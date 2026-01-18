@@ -136,7 +136,7 @@ async function updateStatus(donationId, action) {
 
     showMessage(
       'success',
-      `Donation ${action === 'accept' ? 'accepted' : 'rejected'} successfully`,
+      `Donation ${action === 'accept' ? 'accepted' : 'rejected'} successfully. Please contact with donor for pickup`,
     );
 
     setTimeout(loadDonations, 600);
