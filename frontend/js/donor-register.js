@@ -61,7 +61,7 @@ form.addEventListener('submit', async (event) => {
     showMessage('Registration successful! Redirecting...', 'success');
 
     setTimeout(() => {
-      window.location.href = './donor-login.html';
+      window.location.href = './donor-register-success.html';
     }, 1200);
   } catch (error) {
     console.error(error);

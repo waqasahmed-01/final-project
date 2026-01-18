@@ -72,7 +72,7 @@ form.addEventListener('submit', async (e) => {
     showMessage('NGO registered successfully! Redirecting...', 'success');
 
     setTimeout(() => {
-      window.location.href = './ngo-login.html';
+      window.location.href = './ngo-register-success.html';
     }, 1200);
   } catch (err) {
     console.error(err);

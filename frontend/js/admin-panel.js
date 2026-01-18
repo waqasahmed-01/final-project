@@ -19,9 +19,6 @@ if (!token || role !== 'admin') {
   setTimeout(() => (window.location.href = './admin-login.html'), 1200);
 }
 
-/* -----------------------------------------
-   LOAD PENDING NGOs
------------------------------------------- */
 async function loadPendingNgos() {
   try {
     const res = await fetch(`${API_BASE}/admin/ngos/pending`, {
@@ -50,7 +47,7 @@ async function loadPendingNgos() {
           </button>
         </div>
       </div>
-    `
+    `,
       )
       .join('');
   } catch (err) {
@@ -114,16 +111,16 @@ async function loadAllDonations() {
             d.status === 'pending'
               ? 'warning'
               : d.status === 'accepted'
-              ? 'info'
-              : d.status === 'picked-up'
-              ? 'primary'
-              : d.status === 'completed'
-              ? 'success'
-              : 'danger'
+                ? 'info'
+                : d.status === 'picked-up'
+                  ? 'primary'
+                  : d.status === 'completed'
+                    ? 'success'
+                    : 'danger'
           }">${d.status.toUpperCase()}</span>
         </div>
       </div>
-    `
+    `,
       )
       .join('');
   } catch (err) {

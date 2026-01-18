@@ -3,23 +3,54 @@ const token = localStorage.getItem('token');
 const role = localStorage.getItem('role');
 
 const tableBody = document.getElementById('donationsTableBody');
+const actionMessage = document.getElementById('actionMessage');
 
-function showRowMessage(text) {
+// ---------- helpers ----------
+function showMessage(type, text) {
+  const colors = {
+    success: 'alert alert-success',
+    error: 'alert alert-danger',
+    info: 'alert alert-info',
+  };
+
+  actionMessage.className = colors[type];
+  actionMessage.textContent = text;
+}
+
+function clearMessage() {
+  actionMessage.className = '';
+  actionMessage.textContent = '';
+}
+
+function showTableSpinner() {
   tableBody.innerHTML = `
     <tr>
-      <td colspan="5" class="text-center text-muted">${text}</td>
+      <td colspan="5" class="text-center py-4">
+        <div class="spinner-border text-success spinner-border-sm"></div>
+        <span class="ms-2">Loading donations...</span>
+      </td>
     </tr>
   `;
 }
 
-// Auth guard
+function showRowMessage(text) {
+  tableBody.innerHTML = `
+    <tr>
+      <td colspan="5" class="text-center text-muted py-3">${text}</td>
+    </tr>
+  `;
+}
+
+// ---------- auth guard ----------
 if (!token || role !== 'ngo') {
-  alert('Unauthorized access');
   window.location.href = './ngo-login.html';
 }
 
-// Fetch pending donations
+// ---------- load donations ----------
 async function loadDonations() {
+  // clearMessage();
+  showTableSpinner();
+
   try {
     const res = await fetch(`${API_BASE}/donations/pending`, {
       headers: {
@@ -45,16 +76,23 @@ async function loadDonations() {
       tableBody.innerHTML += `
         <tr>
           <td>${index + 1}</td>
-          <td>${donation.donor.name}</td>
+          <td>${donation.donor?.name || 'Unknown'}</td>
           <td>${donation.foodName}</td>
           <td>${donation.quantity}</td>
           <td>
-            <button class="btn btn-success btn-sm me-2"
-              onclick="updateStatus('${donation._id}', 'accepted')">
+            <button
+              class="btn btn-success btn-sm me-2"
+              data-id="${donation._id}"
+              onclick="updateStatus('${donation._id}', 'accept')"
+            >
               Accept
             </button>
-            <button class="btn btn-danger btn-sm"
-              onclick="updateStatus('${donation._id}', 'rejected')">
+
+            <button
+              class="btn btn-danger btn-sm"
+              data-id="${donation._id}"
+              onclick="updateStatus('${donation._id}', 'reject')"
+            >
               Reject
             </button>
           </td>
@@ -69,30 +107,42 @@ async function loadDonations() {
 
 loadDonations();
 
-async function updateStatus(donationId, status) {
-  if (!confirm(`Are you sure you want to ${status} this donation?`)) return;
+// ---------- accept / reject ----------
+async function updateStatus(donationId, action) {
+  if (!confirm(`Are you sure you want to ${action} this donation?`)) return;
+
+  clearMessage();
+  showMessage('info', 'Processing request...');
+
+  // disable buttons
+  const buttons = document.querySelectorAll(`button[data-id='${donationId}']`);
+  buttons.forEach((btn) => (btn.disabled = true));
 
   try {
-    const res = await fetch(`${API_BASE}/donations/${donationId}/status`, {
-      method: 'PATCH',
+    const res = await fetch(`${API_BASE}/donations/${donationId}/${action}`, {
+      method: 'PUT',
       headers: {
-        'Content-Type': 'application/json',
         Authorization: 'Bearer ' + token,
       },
-      body: JSON.stringify({ status }),
     });
 
     const data = await res.json();
 
     if (!res.ok) {
-      alert(data.message || 'Action failed');
+      showMessage('error', data.message || 'Action failed');
+      buttons.forEach((btn) => (btn.disabled = false));
       return;
     }
 
-    alert(`Donation ${status} successfully`);
-    loadDonations(); // refresh list
+    showMessage(
+      'success',
+      `Donation ${action === 'accept' ? 'accepted' : 'rejected'} successfully`,
+    );
+
+    setTimeout(loadDonations, 600);
   } catch (err) {
     console.error(err);
-    alert('Server error');
+    showMessage('error', 'Server error');
+    buttons.forEach((btn) => (btn.disabled = false));
   }
 }

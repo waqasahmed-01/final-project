@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -30,6 +30,7 @@
             placeholder="Full Name"
             required
           />
+
           <input
             type="email"
             id="email"
@@ -37,13 +38,26 @@
             placeholder="Email"
             required
           />
-          <input
-            type="password"
-            id="password"
-            class="form-control mb-3"
-            placeholder="Password"
-            required
-          />
+
+          <!-- Password with show/hide -->
+          <div class="input-group mb-3">
+            <input
+              type="password"
+              id="password"
+              class="form-control"
+              placeholder="Password"
+              required
+            />
+            <button
+              class="btn btn-outline-secondary"
+              type="button"
+              onclick="togglePassword('password', this)"
+              aria-label="Toggle password visibility"
+            >
+              👁️
+            </button>
+          </div>
+
           <button class="btn btn-primary w-100" id="register-form">
             Register
           </button>
@@ -53,6 +67,20 @@
         </p>
       </div>
     </div>
+
+    <script>
+      function togglePassword(inputId, btn) {
+        const input = document.getElementById(inputId);
+
+        if (input.type === 'password') {
+          input.type = 'text';
+          btn.textContent = '🙈';
+        } else {
+          input.type = 'password';
+          btn.textContent = '👁️';
+        }
+      }
+    </script>
 
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../js/donor-register.js"></script>

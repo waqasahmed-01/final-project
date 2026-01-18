@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -29,18 +29,27 @@
             required
           />
 
-          <input
-            type="password"
-            class="form-control mb-3"
-            placeholder="Password"
-            required
-          />
+          <div class="input-group mb-3">
+            <input
+              type="password"
+              id="password"
+              class="form-control"
+              placeholder="Password"
+              required
+            />
+            <button
+              class="btn btn-outline-secondary"
+              type="button"
+              onclick="togglePassword('password', this)"
+              aria-label="Toggle password visibility"
+            >
+              👁️
+            </button>
+          </div>
 
-          <!-- ✅ submit button -->
           <button type="submit" class="btn btn-success w-100">Login</button>
         </form>
 
-        <!-- ✅ message container -->
         <p class="text-center mt-3" id="final"></p>
 
         <p class="text-center mt-2">
@@ -49,9 +58,20 @@
       </div>
     </div>
 
-    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      function togglePassword(inputId, btn) {
+        const input = document.getElementById(inputId);
 
-    <!-- ✅ link JS -->
+        if (input.type === 'password') {
+          input.type = 'text';
+          btn.textContent = '🙈';
+        } else {
+          input.type = 'password';
+          btn.textContent = '👁️';
+        }
+      }
+    </script>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../js/ngo-login.js"></script>
   </body>
 </html>
