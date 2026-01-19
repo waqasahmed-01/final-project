@@ -18,12 +18,24 @@ if (!token || role !== 'donor') {
   showMessage('error', 'Please login as a donor to create a donation.');
   setTimeout(() => {
     window.location.href = './donor-login.html';
-  }, 1500);
+  }, 5000);
 }
 
-// Simple validation helpers
+// Show / hide price
+const isFreeSelect = document.getElementById('isFree');
+const priceGroup = document.getElementById('priceGroup');
+
+isFreeSelect.addEventListener('change', () => {
+  priceGroup.style.display = isFreeSelect.value === 'false' ? 'block' : 'none';
+});
+
+// Validation helpers
 function isValidText(value, min = 3) {
   return value && value.length >= min;
+}
+
+function isValidPhone(phone) {
+  return /^[0-9+\-\s]{10,15}$/.test(phone);
 }
 
 form.addEventListener('submit', async (e) => {
@@ -34,8 +46,12 @@ form.addEventListener('submit', async (e) => {
   const foodType = document.getElementById('foodType').value;
   const quantity = document.getElementById('quantity').value.trim();
   const location = document.getElementById('location').value.trim();
+  const phoneNumber = document.getElementById('phoneNumber').value.trim();
+  const description = document.getElementById('description').value.trim();
+  const isFree = isFreeSelect.value === 'true';
+  const price = document.getElementById('price').value;
 
-  // ✅ CLIENT-SIDE VALIDATION
+  // ✅ CLIENT VALIDATION
   if (!isValidText(foodName)) {
     showMessage('error', 'Food name must be at least 3 characters.');
     return;
@@ -56,6 +72,16 @@ form.addEventListener('submit', async (e) => {
     return;
   }
 
+  if (!isValidPhone(phoneNumber)) {
+    showMessage('error', 'Please enter a valid phone number.');
+    return;
+  }
+
+  if (!isFree && (!price || Number(price) <= 0)) {
+    showMessage('error', 'Please enter a valid price.');
+    return;
+  }
+
   try {
     const res = await fetch(`${API_BASE}/api/donations`, {
       method: 'POST',
@@ -68,6 +94,10 @@ form.addEventListener('submit', async (e) => {
         foodType,
         quantity,
         location,
+        phoneNumber,
+        description,
+        isFree,
+        price: isFree ? 0 : Number(price),
       }),
     });
 
@@ -78,10 +108,7 @@ form.addEventListener('submit', async (e) => {
       return;
     }
 
-    showMessage(
-      'success',
-      'Donation created successfully! Redirecting to dashboard...',
-    );
+    showMessage('success', 'Donation created successfully! Redirecting...');
 
     setTimeout(() => {
       window.location.href = './donor-dashboard.html';

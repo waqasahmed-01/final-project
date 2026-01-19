@@ -1,11 +1,10 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Create Donation | Food Management</title>
 
-    <!-- Bootstrap CSS -->
     <link
       href="../node_modules/bootstrap/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -23,7 +22,7 @@
 
       .donation-card {
         width: 100%;
-        max-width: 650px;
+        max-width: 680px;
         background: rgba(255, 255, 255, 0.95);
         border-radius: 18px;
         padding: 36px;
@@ -83,6 +82,7 @@
       <h2>Donate Food & Feed Lives 🍲</h2>
 
       <form id="donationForm" novalidate>
+        <!-- Food Name -->
         <div class="mb-3">
           <label class="form-label">Food Name</label>
           <input
@@ -93,6 +93,7 @@
           />
         </div>
 
+        <!-- Food Type -->
         <div class="mb-3">
           <label class="form-label">Food Type</label>
           <select id="foodType" class="form-select">
@@ -103,6 +104,7 @@
           </select>
         </div>
 
+        <!-- Quantity -->
         <div class="mb-3">
           <label class="form-label">Quantity</label>
           <input
@@ -113,6 +115,7 @@
           />
         </div>
 
+        <!-- Pickup Location -->
         <div class="mb-3">
           <label class="form-label">Pickup Location</label>
           <textarea
@@ -121,6 +124,49 @@
             rows="3"
             placeholder="Enter pickup address"
           ></textarea>
+        </div>
+
+        <!-- Phone Number -->
+        <div class="mb-3">
+          <label class="form-label">Contact Phone Number</label>
+          <input
+            type="tel"
+            id="phoneNumber"
+            class="form-control"
+            placeholder="+92 300 1234567"
+          />
+        </div>
+
+        <!-- Description -->
+        <div class="mb-3">
+          <label class="form-label">Food Description</label>
+          <textarea
+            id="description"
+            class="form-control"
+            rows="3"
+            placeholder="Freshly cooked, hygienic, stored properly"
+          ></textarea>
+        </div>
+
+        <!-- Free or Paid -->
+        <div class="mb-3">
+          <label class="form-label">Donation Type</label>
+          <select id="isFree" class="form-select">
+            <option value="true" selected>Free</option>
+            <option value="false">Paid (Cash on Delivery)</option>
+          </select>
+        </div>
+
+        <!-- Price -->
+        <div class="mb-3" id="priceGroup" style="display: none">
+          <label class="form-label">Price (PKR)</label>
+          <input
+            type="number"
+            id="price"
+            class="form-control"
+            placeholder="Enter price in PKR"
+            min="1"
+          />
         </div>
 
         <p id="formMessage" class="text-center fw-semibold mt-2"></p>

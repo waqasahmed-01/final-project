@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>NGO Dashboard | Food Management</title>
+    <title>My Donations | NGO</title>
 
     <link
       rel="stylesheet"
@@ -14,35 +14,29 @@
 
   <body class="dashboard-bg">
     <nav class="navbar navbar-light bg-white shadow-sm px-4">
-      <span class="navbar-brand fw-bold text-success"> 🏢 NGO Dashboard </span>
-      <button class="btn btn-outline-danger btn-sm" onclick="logout()">
-        Logout
-      </button>
+      <span class="navbar-brand fw-bold text-success">
+        📦 My Handled Donations
+      </span>
+      <a href="./ngo-dashboard.html" class="btn btn-outline-secondary btn-sm">
+        ← Back
+      </a>
     </nav>
 
     <div class="container mt-5">
-      <h3 class="fw-bold mb-3">Available Donations</h3>
-
       <div class="card shadow-sm">
         <div class="card-body">
-          <div id="actionMessage" class="mb-3"></div>
-          <a
-            href="./ngo-my-donations.html"
-            class="btn btn-outline-success mb-3"
-          >
-            📋 View My Accepted / Rejected Donations
-          </a>
+          <div id="pageMessage" class="mb-3"></div>
 
           <table class="table align-middle">
             <thead class="table-success">
               <tr>
                 <th>#</th>
-                <th>Donor</th>
                 <th>Food</th>
-                <th>Details</th>
+                <th>Donor</th>
                 <th>Contact</th>
+                <th>Quantity</th>
                 <th>Cost</th>
-                <th>Action</th>
+                <th>Status</th>
               </tr>
             </thead>
             <tbody id="donationsTableBody"></tbody>
@@ -52,17 +46,6 @@
     </div>
 
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../js/ngo-dashboard.js"></script>
-    <script src="../js/logout.js"></script>
-
-    <script>
-      function handleAccept() {
-        alert('Donation accepted. Rider is on the way 🚚');
-      }
-
-      function handleReject() {
-        alert('Donation rejected.');
-      }
-    </script>
+    <script src="../js/ngo-my-donations.js"></script>
   </body>
 </html>

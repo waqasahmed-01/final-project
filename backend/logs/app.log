@@ -20,3 +20,37 @@
 [2026-01-18 08:34:27] INFO: Connected with database...
 [2026-01-18 09:17:13] INFO: Listening on port http://localhost:3000
 [2026-01-18 09:17:13] INFO: Connected with database...
+[2026-01-18 14:15:22] INFO: Listening on port http://localhost:3000
+[2026-01-18 14:15:22] INFO: Connected with database...
+[2026-01-18 14:17:54] ERROR: TypeError: Cannot destructure property 'foodName' of 'req.body' as it is undefined.
+    at D:\final-project\backend\routes\donations.js:85:7
+    at Layer.handleRequest (D:\final-project\backend\node_modules\router\lib\layer.js:152:17)
+    at next (D:\final-project\backend\node_modules\router\lib\route.js:157:13)
+    at D:\final-project\backend\middleware\role.js:9:5
+    at Layer.handleRequest (D:\final-project\backend\node_modules\router\lib\layer.js:152:17)
+    at next (D:\final-project\backend\node_modules\router\lib\route.js:157:13)
+    at auth (D:\final-project\backend\middleware\auth.js:14:5)
+    at Layer.handleRequest (D:\final-project\backend\node_modules\router\lib\layer.js:152:17)
+    at next (D:\final-project\backend\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (D:\final-project\backend\node_modules\router\lib\route.js:117:3)
+[2026-01-18 14:22:00] ERROR: TypeError: Cannot destructure property 'foodName' of 'req.body' as it is undefined.
+    at D:\final-project\backend\routes\donations.js:85:7
+    at Layer.handleRequest (D:\final-project\backend\node_modules\router\lib\layer.js:152:17)
+    at next (D:\final-project\backend\node_modules\router\lib\route.js:157:13)
+    at D:\final-project\backend\middleware\role.js:9:5
+    at Layer.handleRequest (D:\final-project\backend\node_modules\router\lib\layer.js:152:17)
+    at next (D:\final-project\backend\node_modules\router\lib\route.js:157:13)
+    at auth (D:\final-project\backend\middleware\auth.js:14:5)
+    at Layer.handleRequest (D:\final-project\backend\node_modules\router\lib\layer.js:152:17)
+    at next (D:\final-project\backend\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (D:\final-project\backend\node_modules\router\lib\route.js:117:3)
+[2026-01-18 14:29:57] INFO: Listening on port http://localhost:3000
+[2026-01-18 14:29:57] INFO: Connected with database...
+[2026-01-18 14:32:38] INFO: Listening on port http://localhost:3000
+[2026-01-18 14:32:38] INFO: Connected with database...
+[2026-01-18 19:27:54] INFO: Listening on port http://localhost:3000
+[2026-01-18 19:27:54] INFO: Connected with database...
+[2026-01-18 20:35:48] INFO: Listening on port http://localhost:3000
+[2026-01-18 20:35:48] INFO: Connected with database...
+[2026-01-19 06:55:19] INFO: Listening on port http://localhost:3000
+[2026-01-19 06:55:19] INFO: Connected with database...

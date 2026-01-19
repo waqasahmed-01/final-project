@@ -25,7 +25,7 @@ function clearMessage() {
 function showTableSpinner() {
   tableBody.innerHTML = `
     <tr>
-      <td colspan="5" class="text-center py-4">
+      <td colspan="7" class="text-center py-4">
         <div class="spinner-border text-success spinner-border-sm"></div>
         <span class="ms-2">Loading donations...</span>
       </td>
@@ -36,7 +36,7 @@ function showTableSpinner() {
 function showRowMessage(text) {
   tableBody.innerHTML = `
     <tr>
-      <td colspan="5" class="text-center text-muted py-3">${text}</td>
+      <td colspan="7" class="text-center text-muted py-3">${text}</td>
     </tr>
   `;
 }
@@ -76,9 +76,38 @@ async function loadDonations() {
       tableBody.innerHTML += `
         <tr>
           <td>${index + 1}</td>
-          <td>${donation.donor?.name || 'Unknown'}</td>
-          <td>${donation.foodName}</td>
-          <td>${donation.quantity}</td>
+
+          <td>
+            <strong>${donation.donor?.name || 'Unknown'}</strong>
+          </td>
+
+          <td>
+            ${donation.foodName}
+            <br />
+            <small class="text-muted">${donation.foodType}</small>
+          </td>
+
+          <td>
+            <div><strong>Qty:</strong> ${donation.quantity}</div>
+            <div class="text-muted small">
+              ${donation.description || 'No description'}
+            </div>
+          </td>
+
+          <td>
+            <span class="badge bg-secondary">
+              📞 ${donation.phoneNumber || 'N/A'}
+            </span>
+          </td>
+
+          <td>
+            ${
+              donation.isFree
+                ? `<span class="badge bg-success">FREE</span>`
+                : `<span class="badge bg-warning text-dark">PKR ${donation.price}</span>`
+            }
+          </td>
+
           <td>
             <button
               class="btn btn-success btn-sm me-2"
@@ -136,7 +165,9 @@ async function updateStatus(donationId, action) {
 
     showMessage(
       'success',
-      `Donation ${action === 'accept' ? 'accepted' : 'rejected'} successfully. Please contact with donor for pickup`,
+      `Donation ${
+        action === 'accept' ? 'accepted' : 'rejected'
+      } successfully. Please contact donor for pickup.`,
     );
 
     setTimeout(loadDonations, 600);

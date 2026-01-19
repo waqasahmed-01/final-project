@@ -44,6 +44,27 @@ const donationSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  phoneNumber: {
+    type: String,
+    required: true,
+  },
+  description: {
+    type: String,
+    default: '',
+  },
+  isFree: {
+    type: Boolean,
+    required: true,
+    default: true,
+  },
+  price: {
+    type: Number,
+    default: 0,
+  },
+  foodImage: {
+    type: String,
+    default: null, // optional image
+  },
 });
 
 function validateDonation(donation) {
@@ -54,6 +75,22 @@ function validateDonation(donation) {
       .try(Joi.string().min(1).max(50), Joi.number().min(1))
       .required(),
     location: Joi.string().min(3).max(255).required(),
+    phoneNumber: Joi.string()
+      .pattern(/^[0-9+\-\s]{10,15}$/)
+      .required()
+      .messages({
+        'string.pattern.base': 'Invalid phone number format',
+      }),
+    description: Joi.string().max(500).allow('').optional(),
+    isFree: Joi.boolean().required(),
+    price: Joi.number()
+      .min(0)
+      .when('isFree', {
+        is: false,
+        then: Joi.number().greater(0).required(),
+        otherwise: Joi.number().optional(),
+      }),
+    foodImage: Joi.string().allow(null, '').optional(),
     status: Joi.string()
       .valid('pending', 'accepted', 'picked-up', 'completed', 'rejected')
       .optional(),
