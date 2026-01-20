@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Approve NGOs</title>
+    <link
+      rel="stylesheet"
+      href="../node_modules/bootstrap/dist/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    <nav class="navbar navbar-light bg-white shadow-sm px-4">
+      <span class="navbar-brand fw-bold text-success">🏢 Pending NGOs</span>
+      <button class="btn btn-outline-danger btn-sm" onclick="logout()">
+        Logout
+      </button>
+    </nav>
+
+    <div class="container mt-4">
+      <div id="message"></div>
+
+      <table class="table table-bordered align-middle">
+        <thead class="table-success">
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="ngoTable"></tbody>
+      </table>
+    </div>
+
+    <script src="../js/logout.js"></script>
+    <script src="../js/admin-ngos.js"></script>
+  </body>
+</html>

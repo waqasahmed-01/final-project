@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>All Donations</title>
+    <link
+      rel="stylesheet"
+      href="../node_modules/bootstrap/dist/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    <nav class="navbar navbar-light bg-white shadow-sm px-4">
+      <span class="navbar-brand fw-bold text-success">📦 All Donations</span>
+      <button class="btn btn-outline-danger btn-sm" onclick="logout()">
+        Logout
+      </button>
+    </nav>
+
+    <div class="container mt-4">
+      <table class="table table-striped align-middle">
+        <thead class="table-success">
+          <tr>
+            <th>#</th>
+            <th>Food</th>
+            <th>Donor</th>
+            <th>NGO</th>
+            <th>Status</th>
+            <th>Phone</th>
+          </tr>
+        </thead>
+        <tbody id="donationsTable"></tbody>
+      </table>
+    </div>
+
+    <script src="../js/logout.js"></script>
+    <script src="../js/admin-donations.js"></script>
+  </body>
+</html>

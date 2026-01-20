@@ -1,132 +1,151 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Admin Dashboard | Food Management</title>
+
+    <!-- Bootstrap -->
     <link
       rel="stylesheet"
       href="../node_modules/bootstrap/dist/css/bootstrap.min.css"
     />
-    <link rel="stylesheet" href="../css/dashboard.css" />
+
+    <style>
+      body {
+        background: #f5f7fb;
+        font-family: 'Segoe UI', sans-serif;
+      }
+
+      .navbar-brand {
+        font-weight: 700;
+        letter-spacing: 0.5px;
+      }
+
+      .stat-card {
+        border-radius: 14px;
+        padding: 22px;
+        transition: all 0.2s ease;
+      }
+
+      .stat-card:hover {
+        transform: translateY(-3px);
+      }
+
+      .stat-title {
+        font-size: 0.9rem;
+        color: #6c757d;
+      }
+
+      .stat-value {
+        font-size: 1.9rem;
+        font-weight: 700;
+      }
+
+      .action-card {
+        border-radius: 14px;
+        transition: all 0.2s ease;
+        cursor: pointer;
+      }
+
+      .action-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+      }
+
+      .action-icon {
+        font-size: 2rem;
+      }
+    </style>
   </head>
+
   <body>
-    <div class="d-flex" id="wrapper">
-      <!-- Sidebar -->
-      <div class="border-end bg-success text-white" id="sidebar-wrapper">
-        <div
-          class="sidebar-heading text-center py-4 fs-4 fw-bold border-bottom"
-        >
-          🛠️ Admin Panel
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-light bg-white shadow-sm px-4">
+      <span class="navbar-brand text-success"> 🛡️ Admin Dashboard </span>
+
+      <button class="btn btn-outline-danger btn-sm" onclick="logout()">
+        Logout
+      </button>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <div class="container mt-5">
+      <!-- STATS -->
+      <div class="row g-4 mb-4">
+        <div class="col-md-3">
+          <div class="bg-white shadow-sm stat-card">
+            <div class="stat-title">Total Donors</div>
+            <div class="stat-value text-primary" id="totalDonors">--</div>
+          </div>
         </div>
-        <div class="list-group list-group-flush my-3">
-          <a
-            href="#"
-            class="list-group-item list-group-item-action bg-transparent text-white fw-bold"
-            >🏠 Home</a
-          >
-          <a
-            href="#"
-            class="list-group-item list-group-item-action bg-transparent text-white fw-bold"
-            >📋 NGO Requests</a
-          >
-          <a
-            href="#"
-            class="list-group-item list-group-item-action bg-transparent text-white fw-bold"
-            >🍲 All Donations</a
-          >
-          <a
-            href="#"
-            class="list-group-item list-group-item-action bg-transparent text-white fw-bold"
-            >👥 All Users</a
-          >
-          <a
-            href="#"
-            class="list-group-item list-group-item-action bg-transparent text-danger fw-bold"
-            >🚪 Logout</a
-          >
+
+        <div class="col-md-3">
+          <div class="bg-white shadow-sm stat-card">
+            <div class="stat-title">Total NGOs</div>
+            <div class="stat-value text-success" id="totalNgos">--</div>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="bg-white shadow-sm stat-card">
+            <div class="stat-title">Pending NGO Requests</div>
+            <div class="stat-value text-warning" id="pendingNgos">--</div>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="bg-white shadow-sm stat-card">
+            <div class="stat-title">Total Donations</div>
+            <div class="stat-value text-danger" id="totalDonations">--</div>
+          </div>
         </div>
       </div>
 
-      <!-- Page content -->
-      <div id="page-content-wrapper" class="w-100">
-        <nav
-          class="navbar navbar-expand-lg navbar-light bg-light border-bottom"
-        >
-          <div class="container-fluid">
-            <button class="btn btn-success" id="menu-toggle">☰</button>
-            <h4 class="ms-3 mt-2 fw-bold">Welcome, Admin!</h4>
-          </div>
-        </nav>
+      <!-- ACTIONS -->
+      <h5 class="fw-bold mb-3">Quick Actions</h5>
 
-        <div class="container-fluid px-4 mt-4">
-          <h3 class="fw-bold text-success mb-3">Pending NGO Approvals</h3>
-          <div class="card shadow-sm mb-4">
-            <div class="card-body">
-              <table class="table table-hover align-middle">
-                <thead class="table-success">
-                  <tr>
-                    <th>#</th>
-                    <th>NGO Name</th>
-                    <th>Email</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>Helping Hands</td>
-                    <td>helpinghands@gmail.com</td>
-                    <td>
-                      <button class="btn btn-success btn-sm">Approve</button>
-                      <button class="btn btn-danger btn-sm">Reject</button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div
+            class="bg-white shadow-sm p-4 action-card"
+            onclick="location.href = './admin-ngos.html'"
+          >
+            <div class="action-icon mb-2">🏢</div>
+            <h6 class="fw-bold">Approve NGOs</h6>
+            <p class="text-muted mb-0">
+              Review and approve NGO registration requests
+            </p>
           </div>
+        </div>
 
-          <h3 class="fw-bold text-success mb-3">All Users</h3>
-          <div class="card shadow-sm">
-            <div class="card-body">
-              <table class="table table-striped">
-                <thead class="table-success">
-                  <tr>
-                    <th>#</th>
-                    <th>Name</th>
-                    <th>Role</th>
-                    <th>Email</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>Ali Khan</td>
-                    <td>Donor</td>
-                    <td>ali@gmail.com</td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>Helping Hands</td>
-                    <td>NGO</td>
-                    <td>helpinghands@gmail.com</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+        <div class="col-md-4">
+          <div
+            class="bg-white shadow-sm p-4 action-card"
+            onclick="location.href = './admin-donations.html'"
+          >
+            <div class="action-icon mb-2">📦</div>
+            <h6 class="fw-bold">View Donations</h6>
+            <p class="text-muted mb-0">Monitor all donations in the system</p>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div
+            class="bg-white shadow-sm p-4 action-card"
+            onclick="location.href = './admin-users.html'"
+          >
+            <div class="action-icon mb-2">👥</div>
+            <h6 class="fw-bold">View Users</h6>
+            <p class="text-muted mb-0">Manage donors and NGOs</p>
           </div>
         </div>
       </div>
     </div>
 
+    <!-- SCRIPTS -->
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-      document
-        .getElementById('menu-toggle')
-        .addEventListener('click', function () {
-          document.getElementById('wrapper').classList.toggle('toggled');
-        });
-    </script>
+    <script src="../js/logout.js"></script>
+    <script src="../js/admin-dashboard.js"></script>
   </body>
 </html>
