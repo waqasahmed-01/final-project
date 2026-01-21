@@ -8,13 +8,8 @@ async function loadUsers() {
   });
 
   const data = await res.json();
-
-  if (!res.ok) {
-    table.innerHTML = `<tr><td colspan="5">Failed to load users</td></tr>`;
-    return;
-  }
-
   table.innerHTML = '';
+
   data.forEach((u, i) => {
     table.innerHTML += `
       <tr>
@@ -23,15 +18,10 @@ async function loadUsers() {
         <td>${u.email}</td>
         <td>${u.role}</td>
         <td>
-          ${
-            u.role === 'ngo'
-              ? u.isApproved
-                ? 'Approved'
-                : 'Pending'
-              : 'Active'
-          }
+          <span class="badge bg-success">Active</span>
         </td>
-      </tr>`;
+      </tr>
+    `;
   });
 }
 

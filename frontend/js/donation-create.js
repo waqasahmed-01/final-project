@@ -51,7 +51,7 @@ form.addEventListener('submit', async (e) => {
   const isFree = isFreeSelect.value === 'true';
   const price = document.getElementById('price').value;
 
-  // ✅ CLIENT VALIDATION
+  // CLIENT VALIDATION
   if (!isValidText(foodName)) {
     showMessage('error', 'Food name must be at least 3 characters.');
     return;
